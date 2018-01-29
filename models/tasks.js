@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataType) =>{
+module.exports = (sequelize, DataType) => {
   const Tasks = sequelize.define("Tasks", {
     id: {
       type: DataType.INTEGER,
@@ -8,7 +8,7 @@ module.exports = (sequelize, DataType) =>{
     title: {
       type: DataType.STRING,
       allowNull: false,
-      validate:{
+      validate: {
         notEmpty: true
       }
     },
@@ -16,13 +16,13 @@ module.exports = (sequelize, DataType) =>{
       type: DataType.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    }
+  }, {
+    classMethods: {
+      associate: (models) => {
+        Tasks.belongsTo(models.Users);
       }
-    },{
-      classMethods: {
-        associate: (models) =>{
-          Tasks.belongsTo(models.Users);
-        }
-      }
+    }
   });
   return Tasks;
 };
